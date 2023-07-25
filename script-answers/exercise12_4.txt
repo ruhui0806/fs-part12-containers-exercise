@@ -1,6 +1,11 @@
 Install Node while inside the container and run the index file with node /usr/src/app/index.js in the container.
 
-    $ docker start -i sweet_hopper
+To Running the container:
+
+    $ docker start -i sweet_hopper  
+    
+While the container is running:
+
     $ apt-get install curl
     $ curl -sL https://deb.nodesource.com/setup_16.x | bash
     $ apt-get install nodejs
