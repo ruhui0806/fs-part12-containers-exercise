@@ -1,0 +1,8 @@
+version: "3.8" # this version is for docker-compose-file version
+
+services:
+  app:
+    image: fs-todo-backend
+    build: . ## Declares where to build if image is not found
+    ports:
+      - 3000:3000

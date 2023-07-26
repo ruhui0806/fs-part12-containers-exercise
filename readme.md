@@ -51,3 +51,19 @@ The local repository's name is changed correspondingly: fs-part12-containers-exe
 <li> build a new image with the Dockerfile in the current working directory, flag: -t, this will help us name the image
 
     docker build -t fs-todo-backend .
+
+<li> then run it with a specific port with -p flag. The format is -p host-port:application port
+
+    docker run -p 3000:3000 fs-todo-backend
+
+<li> Use the following command to build and run the application with docker-compose.yml file
+
+    docker compose up
+
+<li> if you want to rebuild the image:
+
+    docker compose up --build
+
+<li> close the running container and remove it:
+
+    docker compose down
