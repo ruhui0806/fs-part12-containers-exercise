@@ -6,7 +6,9 @@ The remote repository's name is: fs-part12-containers-exercise
 
 The local repository's name is changed correspondingly: fs-part12-containers-exercise
 
-Commands
+# Commands
+
+# part 12a
 
 <li> list all the folders & files in the image
 
@@ -44,4 +46,8 @@ Commands
 
     commit CONTAINER-ID-OR-CONTAINER-NAME NEW-IMAGE-NAME
 
-<li>
+# part12b
+
+<li> build a new image with the Dockerfile in the current working directory, flag: -t, this will help us name the image
+
+    docker build -t fs-todo-backend .
