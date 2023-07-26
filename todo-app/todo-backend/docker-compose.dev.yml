@@ -12,3 +12,11 @@ services:
     volumes: ## use a bind-mount to mount the file mongo-init.js to the container. The formula is: FILE-IN-HOST:FILE-IN-CONTAINER. The location of the mongo-init.js in the container side can be found from the docker hub for mongo: https://hub.docker.com/_/mongo
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - ./mongo_data:/data/db # The volume: /my/own/datadir:/data/db part of the command mounts the /my/own/datadir directory from the underlying host system as /data/db inside the container, where MongoDB by default will write its data files.
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - ./redis_data:/data

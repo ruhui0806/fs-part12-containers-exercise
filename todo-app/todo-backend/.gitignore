@@ -62,3 +62,6 @@ typings/
 
 # mongodb database for data storage (bind mount with the files to mongo container)
 mongo_data
+
+# redis database for data storage (bind mount with the files to redis container)
+redis_data
