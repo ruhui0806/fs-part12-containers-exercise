@@ -1,6 +1,7 @@
 const express = require("express");
 const { Todo } = require("../mongo");
 const router = express.Router();
+const redis = require("../redis");
 
 /* GET todos listing. */
 router.get("/", async (_, res) => {
@@ -12,10 +13,31 @@ router.get("/", async (_, res) => {
 router.post("/", async (req, res) => {
   const todo = await Todo.create({
     text: req.body.text,
-    done: false,
+    done: req.body.done,
   });
+  const current_added_todos = await redis.getAsync("added_todos");
+  console.log("current_added_todos: ", current_added_todos); //NaN
+  if (!current_added_todos || isNaN(current_added_todos)) {
+    await redis.setAsync("added_todos", 1);
+  } else {
+    await redis.setAsync("added_todos", parseInt(current_added_todos) + 1);
+  }
+
   res.send(todo);
 });
+// router.post("/", async (req, res) => {
+//   const todo = await Todo.create({
+//     text: req.body.text,
+//     done: false,
+//   });
+//   const current_added_todos = await redis.getAsync("added_todos");
+//   if (!current_added_todos || isNaN(current_added_todos)) {
+//     await redis.setAsync("added_todos", 1);
+//   } else {
+//     await redis.setAsync("added_todos", parseInt(current_added_todos) + 1);
+//   }
+//   res.send(todo);
+// });
 
 const singleRouter = express.Router();
 

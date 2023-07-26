@@ -1,0 +1,48 @@
+Run the redis container: run the following 2 commands separately in different terminal
+
+    $ docker compose -f docker-compose.dev.yml up
+
+    $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database REDIS_URL=redis://localhost:6379 npm run dev
+
+Go to the Redis container with docker exec and open the redis-cli. Firstly, find out the redis container's name/id:
+
+    $ docker ps
+
+    CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                     NAMES
+    6afc54f95275   mongo     "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   0.0.0.0:3456->27017/tcp   todo-backend-mongo-1
+    d922e5a18e95   redis     "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   0.0.0.0:6379->6379/tcp    todo-backend-redis-1
+
+Then run with docker exec and open the redis-cli:
+
+
+    $ docker exec -it d9 redis-cli
+    127.0.0.1:6379> KEYS added_todos
+    (empty array)
+    127.0.0.1:6379> GET added_todos
+    (nil)
+    127.0.0.1:6379> GET added_todos
+    (nil)
+    127.0.0.1:6379> SET added_todos 9001
+    OK
+    127.0.0.1:6379> GET added_todos
+    "9001"
+
+Get the value after creating a new todo with Postman:
+    127.0.0.1:6379> GET added_todos
+    "9002"
+
+Delete the key from cli and ensure that counter works when new todos are added
+    127.0.0.1:6379> DEL added_todos
+    (integer) 1
+
+    127.0.0.1:6379> GET added_todos
+    (nil)
+
+Check if the counter works correctly when a new todo is added:    
+
+    127.0.0.1:6379> GET added_todos
+    "1"
+
+Exit the cli
+
+    exit
