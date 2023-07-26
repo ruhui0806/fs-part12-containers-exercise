@@ -15,4 +15,11 @@ router.get("/", async (req, res) => {
   });
 });
 
+router.get("/statistics", async (req, res) => {
+  const result = redis.getAsync("added_todos");
+  if (!result || isNaN(result)) return res.json({ added_todos: 0 });
+
+  res.json({ added_todos: parseInt(result) });
+});
+
 module.exports = router;
