@@ -60,6 +60,10 @@ The local repository's name is changed correspondingly: fs-part12-containers-exe
 
     docker compose up
 
+<li> You can also use -f flag to specify a file to run the docker compose command
+
+    docker compose -f docker-compose.dev.yml up
+
 <li> if you want to rebuild the image:
 
     docker compose up --build

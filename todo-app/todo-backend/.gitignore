@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+# mongodb database for data storage (bind mount with the files to mongo container)
+mongo_data
