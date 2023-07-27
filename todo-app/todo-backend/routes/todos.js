@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
     await redis.setAsync("added_todos", parseInt(current_added_todos) + 1);
   }
 
-  res.send(todo);
+  res.json(todo).status(201);
 });
 // router.post("/", async (req, res) => {
 //   const todo = await Todo.create({
@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
 //   } else {
 //     await redis.setAsync("added_todos", parseInt(current_added_todos) + 1);
 //   }
-//   res.send(todo);
+//   res.json(todo).status(201);
 // });
 
 const singleRouter = express.Router();
