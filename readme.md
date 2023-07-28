@@ -71,3 +71,19 @@ The local repository's name is changed correspondingly: fs-part12-containers-exe
 <li> close the running container and remove it:
 
     docker compose down
+
+# part12 c:
+
+## exercise 12.13
+
+To run the frontend outside the container and ensure that it works with the backend:
+
+<li> Go to the backend repo, and run the backend in the container first: (run the following commands in separate terminals )
+
+    docker compose -f docker-compose.dev.yml
+
+    MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database REDIS_URL=redis://localhost:6379 npm run dev
+
+<li> set up the environmental variables for the frontend, and run the following command in the frontend repo:
+
+    REACT_APP_BACKEND_URL=http://localhost:3000 npm start
