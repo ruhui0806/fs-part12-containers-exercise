@@ -87,3 +87,11 @@ To run the frontend outside the container and ensure that it works with the back
 <li> set up the environmental variables for the frontend, and run the following command in the frontend repo:
 
     REACT_APP_BACKEND_URL=http://localhost:3000 npm start
+
+<li> create dev.Dockerfile and build the image for development container:
+
+    docker build -f ./dev.Dockerfile -t hello-front-dev .
+
+<li> Then, run the following command to run the container:
+
+    docker container run -p 3003:3000 hello-front-dev
