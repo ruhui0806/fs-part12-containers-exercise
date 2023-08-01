@@ -95,3 +95,18 @@ To run the frontend outside the container and ensure that it works with the back
 <li> Then, run the following command to run the container:
 
     docker container run -p 3003:3000 hello-front-dev
+
+<li> Set up environment variables for mongodb and redis in docker-compose.dev.yml:
+
+    environment:
+      - MONGO_URL=mongodb://the_username:the_password@mongo:27017/the_database
+      - REDIS_URL=redis://redis:6379
+
+Note: this is different from putting them in the .env file:
+
+    MONGO_URL= "mongodb://the_username:the_password@localhost:3456/the_database"
+    REDIS_URL= "redis://localhost:6379"
+
+Or putting them in the command line:
+
+    MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database REDIS_URL=redis://localhost:6379 npm run dev
