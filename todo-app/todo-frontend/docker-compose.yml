@@ -9,3 +9,5 @@ services:
     ports:
       - 3003:3000
     container_name: hello-front-dev
+  debug-tool:
+    image: busybox
