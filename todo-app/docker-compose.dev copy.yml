@@ -1,3 +1,4 @@
+#This version is for running the whole todo app in the docker container without using reverse proxy
 services:
   app:
     image: todo-frontend
@@ -6,11 +7,11 @@ services:
       dockerfile: dev.Dockerfile
     volumes:
       - ./todo-frontend/:/usr/src/app
-    # ports: ## port should be commented out due to the usage of reverse proxy
-    #   - 3210:3000 # to access from broswer, open the website: http://localhost:3210. To access inside the container: open the bash mode ($ docker exec -it <container-name-or-id> bash), and then run: curl http://app:3000
+    ports:
+      - 3210:3000 # to access from broswer, open the website: http://localhost:3210. To access inside the container: open the bash mode ($ docker exec -it <container-name-or-id> bash), and then run: curl http://app:3000
     container_name: dev-todo-frontend
     environment:
-      - REACT_APP_BACKEND_URL=http://localhost:8080/api #Without the usage of reverse proxy, this env variable http://localhost:8080 matched by the ports in the "server" section: 8080:3000. When using nginx reverse proxy, this env variable should be changed to : http://localhost:8080/api, as it matches the nginx.dev.conf file.
+      - REACT_APP_BACKEND_URL=http://localhost:8080 #Without the usage of reverse proxy, this env variable http://localhost:8080 matched by the ports in the "server" section: 8080:3000. When using nginx reverse proxy, this env variable should be changed to : http://localhost:8080/api, as it matches the nginx.dev.conf file.
   server:
     image: todo-backend
     build:
@@ -18,8 +19,8 @@ services:
       dockerfile: dev.Dockerfile
     volumes:
       - ./todo-backend/:/usr/src/app
-    # ports: ## port should be commented out due to the usage of reverse proxy
-    #   - 8080:3000 # to access from broswer, open the website: http://localhost:8080. To access inside the container: open the bash mode ($ docker exec -it <container-name-or-id> bash), and then run: curl http://server:3000
+    ports:
+      - 8080:3000 # to access from broswer, open the website: http://localhost:8080. To access inside the container: open the bash mode ($ docker exec -it <container-name-or-id> bash), and then run: curl http://server:3000
     container_name: dev-todo-backend
     environment:
       - MONGO_URL=mongodb://the_username:the_password@mongo:27017/the_database
